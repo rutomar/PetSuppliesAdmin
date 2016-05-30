@@ -1,97 +1,141 @@
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<span class="lead">Add Products Form </span>
-	</div>
-	<div class="formcontainer">
-		<form ng-submit="addProduct()" name="productForm" class="form-horizontal">
-			<input type="hidden" ng-model="product.productId" />
-			<div class="row">
-				<div class="form-group col-md-12">
-					<label class="col-md-2 control-lable" for="uname">Name</label>
-					<div class="col-md-7">
-						<input type="text" ng-model="ctrl.user.username" id="uname"
-							class="username form-control input-sm"
-							placeholder="Enter your name" required ng-minlength="3" />
-						<div class="has-error" ng-show="myForm.$dirty">
-							<span ng-show="myForm.uname.$error.required">This is a
-								required field</span> <span ng-show="myForm.uname.$error.minlength">Minimum
-								length required is 3</span> <span ng-show="myForm.uname.$invalid">This
+<div class="col-xs-12 col-sm-9"></div>
+<div class="col-xs-12 col-sm-9">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<span class="lead">Add Product Form </span>
+		</div>
+		<div class="panel-body">
+			<form name="productForm" ng-submit="submit()"  class="form-horizontal" >
+				<div class="form-group col-xs-10">
+					<label class="col-xs-3 col-xs-offset-1" for="productCode">Product
+						Code</label>
+					<div class="col-xs-8">
+						<input type="text" ng-model="product.productCode" id="productCode"
+							class="form-control input-sm" placeholder="Enter product code"
+							required ng-minlength="3" ng-disabled="editProduct" />
+						<!-- <div class="has-error" ng-show="productForm.$dirty"> -->
+							<span ng-show="productForm.productCode.$error.required">This
+								is a required field</span> <span
+								ng-show="productForm.productCode.$error.minlength">Minimum
+								length required is 3</span> <span
+								ng-show="productForm.productCode.$invalid">This
+								field is invalid </span>
+					<!-- 	</div> -->
+					</div>
+				</div>
+				<div class="form-group col-xs-10">
+					<label class="col-xs-3 col-xs-offset-1" for="productName">Product
+						Name</label>
+					<div class="col-xs-8">
+						<input type="text" ng-model="product.productName" id="productName"
+							class="form-control input-sm" placeholder="Enter product name"
+							required ng-minlength="3" />
+						<div class="has-error" ng-show="productForm.$dirty">
+							<span ng-show="productForm.product.productName.$error.required">This
+								is a required field</span> <span
+								ng-show="productForm.product.productName.$error.minlength">Minimum
+								length required is 3</span> <span
+								ng-show="productForm.product.productName.$invalid">This
 								field is invalid </span>
 						</div>
 					</div>
 				</div>
-			</div>
-
-
-			<div class="row">
-				<div class="form-group col-md-12">
-					<label class="col-md-2 control-lable" for="address">Address</label>
-					<div class="col-md-7">
-						<input type="text" ng-model="ctrl.user.address" id="address"
-							class="form-control input-sm"
-							placeholder="Enter your Address. [This field is validation free]" />
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="form-group col-md-12">
-					<label class="col-md-2 control-lable" for="email">Email</label>
-					<div class="col-md-7">
-						<input type="email" ng-model="ctrl.user.email" id="email"
-							class="email form-control input-sm"
-							placeholder="Enter your Email" required />
-						<div class="has-error" ng-show="myForm.$dirty">
-							<span ng-show="myForm.email.$error.required">This is a
-								required field</span> <span ng-show="myForm.email.$invalid">This
+				<div class="form-group col-xs-10">
+					<label class="col-xs-3 col-xs-offset-1" for="productDesc" >Description</label>
+					<div class="col-xs-8">
+						<input type="text" ng-model="product.productDesc" id="productDesc"
+							class="form-control input-sm" placeholder="Product Description"  required/>
+							
+							<div class="has-error" ng-show="productForm.$dirty">
+							<span ng-show="productForm.product.productDesc.$error.required">This
+								is a required field</span><span
+								ng-show="productForm.product.productDesc.$invalid">This
 								field is invalid </span>
 						</div>
 					</div>
 				</div>
-			</div>
+				<div class="form-group col-xs-10">
+					<label class="col-xs-3 col-xs-offset-1" for="productPrice">Product
+						Price (INR) </label>
+					<div class="col-xs-8">
+						<input type="text" ng-model="product.productPrice"
+							id="productPrice" class="form-control input-sm"
+							placeholder="Enter product price" ng-change="verifyIfNAN()" required/>
+						<div class="has-error" ng-show="productForm.$dirty">
+							<span ng-show="productForm.product.productPrice.$error.required">This
+								is a required field</span><span
+								ng-show="productForm.product.productPrice.$invalid">This
+								field is invalid </span>
+						</div>
+					</div>
+				</div>
 
-			<div class="row">
-				<div class="form-actions floatRight">
-					<input type="submit" value="{{!ctrl.user.id ? 'Add' : 'Update'}}"
-						class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
-					<button type="button" ng-click="ctrl.reset()"
-						class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset
+				<div class="form-group col-xs-10">
+					<label class="col-xs-3 col-xs-offset-1" for="categoryCode">Product
+						Category </label>
+					<div class="col-xs-8">
+						<select name="product.categoryCode" class="form-control input-sm"
+							id="categoryCode" ng-model="product.categoryCode" required>
+							<option ng-repeat="category in categories"
+								value="{{category.categoryCode}}">{{category.categoryName}}</option>
+						</select>
+						<div class="has-error" ng-show="productForm.$dirty">
+							<span ng-show="productForm.product.categoryCode.$error.required">This
+								is a required field</span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group col-xs-10 col-xs-offset-3">
+					<input type="submit" value="{{!editProduct ? 'Add' : 'Update'}}"
+						class="btn btn-primary btn-sm" ng-disabled="productForm.$invalid">
+					<button type="button" ng-click="reset()"
+						class="btn btn-warning btn-sm" ng-disabled="productForm.$pristine">Reset
 						Form</button>
+
 				</div>
-			</div>
-		</form>
+			</form>
+		</div>
 	</div>
 </div>
-<div class="panel panel-default">
-	<!-- Default panel contents -->
-	<div class="panel-heading">
-		<span class="lead">List of Users </span>
-	</div>
-	<div class="tablecontainer">
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>ID.</th>
-					<th>Name</th>
-					<th>Address</th>
-					<th>Email</th>
-					<th width="20%"></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="u in ctrl.users">
-					<td><span ng-bind="u.id"></span></td>
-					<td><span ng-bind="u.username"></span></td>
-					<td><span ng-bind="u.address"></span></td>
-					<td><span ng-bind="u.email"></span></td>
-					<td>
-						<button type="button" ng-click="ctrl.edit(u.id)"
-							class="btn btn-success custom-width">Edit</button>
-						<button type="button" ng-click="ctrl.remove(u.id)"
-							class="btn btn-danger custom-width">Remove</button>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+<div class="col-xs-3"></div>
+<div class="col-xs-9">
+	<div class="panel panel-default">
+		<!-- Default panel contents -->
+		<div class="panel-heading">
+			<span class="lead">List of Products </span>
+		</div>
+		<div class="tablecontainer">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Product code</th>
+						<th>Product name</th>
+						<th>Product Price (INR)</th>
+						<th>Product Category</th>
+						<th width="30%"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-show="!products">
+						<td>No Products found.</td>
+					</tr>
+					<tr ng-show="p" ng-repeat="p in products">
+						<td><span ng-bind="p.productCode"></span></td>
+						<td><span ng-bind="p.productName"></span></td>
+						<td><span>{{p.productPrice| currency:'&#8377;'}}</span></td>
+						<td><span ng-bind="p.categoryCode"></span></td>
+						<td>
+							<button type="button" ng-click="upload(p.productCode)"
+								class="btn btn-success custom-width">Upload Image</button>
+							<button type="button" ng-click="edit(p.productCode)"
+								class="btn btn-success custom-width">Edit</button>
+							<button type="button" ng-click="remove(p.productCode)"
+								class="btn btn-danger custom-width">Delete</button>
+
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </div>

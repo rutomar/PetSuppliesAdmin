@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="admin">
 <head>
-<meta charset="utf-8">
+<!-- <meta charset="utf-8"> -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -35,6 +35,8 @@
 <script src="js/AdminLoginController.js"></script>
 <script src="js/CategoryController.js"></script>
 <script src="js/HomePageController.js"></script>
+<script src="js/ProductController.js"></script>
+<script src="js/EditUserController.js"></script>
 <title>PetShop | Admin</title>
 
 <style type="text/css">
@@ -74,25 +76,12 @@
 
 					<ul class="nav">
 						<li class="active"><a href="home">Home</a></li>
-						<li class="dropdown"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#">Users <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="editUser">Edit User</a></li>
-								<li><a href="deleteUser">Delete User</a></li>
-								<li><a href="viewUser">View User</a></li>
-								<li><a href="userOrders">User Order</a></li>
-							</ul></li>
-						<li ><a href="category">Category</a>
-						</li>
-						<li class="dropdown"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#">Product <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Add Product</a></li>
-								<li><a href="#">Delete Product</a></li>
-								<li><a href="#">Edit Product</a></li>
-							</ul></li>
+						<li><a href="user">Users</a></li>
+						<li><a href="category">Category</a></li>
+						<li><a href="product">Product</a></li>
 					</ul>
 				</div>
+
 				<ng-view></ng-view>
 			</div>
 			<!--/.row-->
