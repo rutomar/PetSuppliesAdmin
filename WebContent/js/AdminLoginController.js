@@ -3,22 +3,19 @@
 admin.controller("AdminLoginController", function($rootScope, $scope, $http,
 		$location) {
 
-	$rootScope.authenticated = false;
 	$rootScope.webserviceuri = "http://localhost:8084/core";
 
 	var authenticate = function(credentials, callback) {
 
-		var headers = credentials ? {
-			authorization : "Basic "
-					+ btoa(credentials.username + ":" + credentials.password)
-		} : {};
+		$http.get(
+				$rootScope.webserviceuri + '/loginUser/' + credentials.username
+						+ "/" + credentials.password).success(function(data) {
 
-		$http.get($rootScope.webserviceuri + '/', {
-			headers : headers
-		}).success(function(data) {
-			// if (data.name) {
 			if (data) {
-				$rootScope.authenticated = true;
+				if (data.role === 'ADMIN')
+					$rootScope.authenticated = true;
+				else
+					$rootScope.authenticated = false;
 			} else {
 				$rootScope.authenticated = false;
 			}
@@ -30,8 +27,10 @@ admin.controller("AdminLoginController", function($rootScope, $scope, $http,
 
 	}
 
-	authenticate();
-	$scope.credentials = {};
+	$scope.credentials = {
+		username : '',
+		password : ''
+	};
 	$scope.login = function() {
 		authenticate($scope.credentials, function() {
 			if ($rootScope.authenticated) {

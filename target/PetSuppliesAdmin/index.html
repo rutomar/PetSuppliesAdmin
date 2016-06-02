@@ -37,6 +37,9 @@
 <script src="js/HomePageController.js"></script>
 <script src="js/ProductController.js"></script>
 <script src="js/EditUserController.js"></script>
+<script src="js/OrdersController.js"></script>
+<script src="js/LogoutController.js"></script>
+
 <title>PetShop | Admin</title>
 
 <style type="text/css">
@@ -76,9 +79,11 @@
 
 					<ul class="nav">
 						<li class="active"><a href="home">Home</a></li>
-						<li><a href="user">Users</a></li>
-						<li><a href="category">Category</a></li>
-						<li><a href="product">Product</a></li>
+						<li ng-hide="!authenticated"><a href="user">Users</a></li>
+						<li ng-hide="!authenticated"><a href="category">Category</a></li>
+						<li ng-hide="!authenticated"><a href="product">Product</a></li>
+						<li ng-hide="!authenticated"><a href="userOrder">Orders</a></li>
+						<li ng-hide="!authenticated"><a href="logout">Logout</a></li>
 					</ul>
 				</div>
 

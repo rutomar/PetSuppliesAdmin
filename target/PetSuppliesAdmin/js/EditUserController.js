@@ -5,12 +5,12 @@ admin.controller('EditUserController', function($rootScope, $scope, $http,
 	
 	var EditUserUri = $rootScope.webserviceuri + '/user/' ;
 	
-	// $scope.users = $rootScope.users;
-		
+	
 	$scope.user = {
 			userId : '',
 			userName : '',
 			password : '',
+			role : '',
 			address : {
 				userId : '',
 				address : '',
@@ -37,6 +37,7 @@ admin.controller('EditUserController', function($rootScope, $scope, $http,
 					userId : user.userId,
 					userName : user.userName,
 					password : user.password,
+					role : user.role,
 					address : {
 						userId : user.userId,
 						address : user.address.address,
@@ -126,6 +127,7 @@ admin.controller('EditUserController', function($rootScope, $scope, $http,
 				userId : '',
 				userName : '',
 				password : '',
+				role: '',
 				address : {
 					userId : '',
 					address : '',
